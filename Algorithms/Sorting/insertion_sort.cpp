@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 /*
@@ -9,16 +11,13 @@ put key in the empty place now.
 
 */
 
-void insertionSort(int a[], int n)
-{
+void insertionSort(int a[], int n) {
     int i, j, key;
-    for (i = 1; i < n; ++i)
-    {
+    for (i = 1; i < n; ++i) {
         key = a[i];
         j = i - 1;
         //overwrite every bigger element to right
-        while (j >= 0 && a[j] > key)
-        {
+        while (j >= 0 && a[j] > key) {
             a[j + 1] = a[j];
             --j;
         }
@@ -27,22 +26,18 @@ void insertionSort(int a[], int n)
     }
 }
 
-void printArray(int a[], int n)
-{
-    for (int i = 0; i < n; ++i)
-    {
+void printArray(int a[], int n) {
+    for (int i = 0; i < n; ++i) {
         cout << a[i] << endl;
     }
 }
 
 // driver program
-int main()
-{
+int main() {
     int n;
     cin >> n;
     int a[n];
-    for (int i = 0; i < n; ++i)
-    {
+    for (int i = 0; i < n; ++i) {
         cin >> a[i];
     }
     insertionSort(a, n);

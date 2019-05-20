@@ -1,5 +1,5 @@
-#include <algorithm>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 /*
@@ -15,20 +15,17 @@ best case: O(n)
 
 */
 
-void bubbleSort(int a[], int n) {
-    int i, j;
-    for (i = 0; i < n; ++i) {
+void bubbleSort(vector<int>& a) {
+    int n = a.size();
+    for (int i = 0; i < n - 1; ++i) {
         bool swapped = false;
-        for (j = 0; j < n - j - 1; ++j) {
-            // check if there is an inversion
+        for (int j = 0; j < n - i - i; ++j) {
             if (a[j] > a[j + 1]) {
                 swap(a[j], a[j + 1]);
                 swapped = true;
             }
         }
-        // break loop early if there has been a pass, where no element was swapped
-        // hence array is alredy in sorted state
-        if (!swapped) {
+        if (swapped == false) {
             break;
         }
     }
@@ -49,7 +46,8 @@ int main() {
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
     }
-    bubbleSort(a, n);
+    vector<int> arr(a, a + n);
+    bubbleSort(arr);
     printArray(a, n);
     return 0;
 }
