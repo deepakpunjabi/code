@@ -1,4 +1,4 @@
-.
+```
 ├── README.md
 ├── algo
 │   ├── all_bin_comb.c
@@ -51,3 +51,4 @@
 └── splitwise.cpp
 
 11 directories, 39 files
+```
