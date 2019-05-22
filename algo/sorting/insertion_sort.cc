@@ -22,3 +22,24 @@ void insertionSort(vector<int> &a) {
     }
 }
 
+void insertionSortCorrectPosition(int a[], int res[], int n)
+{
+    int i, j, key;
+
+    for (i = 1; i < n; ++i)
+    {
+        key = a[i];
+        j = i - 1;
+
+        while (j >= 0)
+        {
+            if (a[j] > key)
+            {
+                res[j] = res[j] + 1;
+                ++count;
+            }
+            --j;
+        }
+        res[i] = i - count;
+    }
+}
