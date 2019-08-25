@@ -1,79 +1,66 @@
 #include <iostream>
-#include <vector>
 #include <list>
+#include <vector>
+
 using namespace std;
-class Graph
-{
+
+class Graph {
     int v;
     list<int> *adj;
     // can use vector as well.
     // vector<int> *adj;
     // adj = new vector<int>[v];
 
-  public:
-    Graph(int v)
-    {
-        this->v = v;
+   public:
+    Graph(int x) : v(x) {
         adj = new list<int>[v];
     }
 
-    void addEdge(int u, int v)
-    {
+    void addEdge(int u, int v) {
         adj[u].push_back(v);
         // adj[v].push_back(u); // directed graph
     }
 
-    bool isCyclicDriver()
-    {
+    bool isCyclic() {
         vector<bool> visited(v, false);
         vector<bool> stacked(v, false);
         int source = 0;
 
-        return isCyclic(source, visited, stacked);
+        return hasBackEdge(source, visited, stacked);
     }
 
-    bool isCyclic(int node, vector<bool> &visited, vector<bool> &stacked)
-    {
-        cout << "current node --> " << node << endl;
+    // check if any back edge (node -> ancestor node) exists in graph
+    bool hasBackEdge(int node, vector<bool> &visited, vector<bool> &stacked) {
         visited[node] = true;
         stacked[node] = true;
 
-        for (auto i : adj[node])
-        {
-            if (!visited[i])
-            {
-                return isCyclic(i, visited, stacked);
-            }
-            else
-            {
-                if (stacked[i])
-                {
-                    cout << "graph had cycle" << endl;
-                    return true;
-                }
+        for (const auto &i : adj[node]) {
+            if (!visited[i]) {
+                return hasBackEdge(i, visited, stacked);
+            } else if (stacked[i]) {
+                // meaning there is an edge from this node to ancestor node
+                printf("Edge (%d, %d) is back edge \n", node, i);
+                return true;
             }
         }
 
+        // remove node from stack as his path is searched
         stacked[node] = false;
         return false;
     }
 
-    void printGraph()
-    {
-        for (int i = 0; i < v; ++i)
-        {
+    void print() {
+        for (int i = 0; i < v; ++i) {
             cout << i << " --> ";
-            for (auto j : adj[i])
-            {
-                cout << j << " , ";
+            for (auto j : adj[i]) {
+                cout << j << ", ";
             }
             cout << endl;
         }
     }
 };
 
-int main()
-{
+int main() {
     Graph g(4);
     g.addEdge(0, 1);
     g.addEdge(0, 2);
@@ -84,15 +71,11 @@ int main()
 
     // g.printGraph();
 
-    if (g.isCyclicDriver())
-    {
+    if (g.isCyclic()) {
         cout << "Graph contains cycle" << endl;
+        return 1;
     }
 
-    else
-    {
-        cout << "Graph doesn't contain cycle" << endl;
-    }
-
+    cout << "Graph doesn't contain cycle" << endl;
     return 0;
 }
