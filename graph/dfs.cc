@@ -7,7 +7,7 @@ using namespace std;
 
 class Graph {
     int v;
-    list<int> *adj;
+    list<int>* adj;
     // can use vector as well.
     // vector<int> *adj;
     // adj = new vector<int>[v];
@@ -22,47 +22,40 @@ class Graph {
         // adj[v].push_back(u);
     }
 
-    void bfs(int s) {
-        vector<bool> visited(v, false);
-        queue<int> q;
-
-        visited[s] = true;
-        q.push(s);
-
-        while (!q.empty()) {
-            int front = q.front();
-            q.pop();
-
-            cout << front << endl;
-
-            for (auto i : adj[front]) {
-                if (!visited[i]) {
-                    visited[i] = true;
-                    q.push(i);
-                }
-            }
+    void dfsNode(int node, vector<bool>& visited) {
+        // this might happen due to looping over in dfs
+        if (visited[node]) {
+            return;
         }
-    }
+        visited[node] = true;
 
-    void dfs(int s, vector<bool> &visited) {
-        visited[s] = true;
-        cout << s << endl;
+        process(node);
 
-        for (auto i : adj[s]) {
+        for (const auto& i : adj[node]) {
             if (!visited[i]) {
-                dfs(i, visited);
+                cout << "exploring edge: " << node << " --> " << i << endl;
+                dfsNode(i, visited);
             }
         }
     }
 
-    void dfsDriver(int s) {
+    void dfs() {
         vector<bool> visited(v, false);
-        dfs(s, visited);
+        // this is needed for forest
+        // otherwise your reach will be only till depth starting from src
+        for (int i = 0; i < v; ++i) {
+            cout << "running dfs from: " << i << endl;
+            dfsNode(i, visited);
+        }
+    }
+
+    void process(int node) {
+        cout << "processing: " << node << endl;
     }
 };
 
 int main() {
-    Graph g(5);
+    Graph g(7);
 
     g.addEdge(0, 1);
     g.addEdge(0, 2);
@@ -70,10 +63,15 @@ int main() {
     g.addEdge(2, 3);
     g.addEdge(4, 4);
 
+    // this edge will not come in output
+    // for that, we need to use dfs for connected components
+    // via reversing the direction
+    g.addEdge(6, 5);
+
     // g.bfs(0);
     // g.bfs(4);
 
-    g.dfsDriver(0);
+    g.dfs();
 
     return 0;
 }
