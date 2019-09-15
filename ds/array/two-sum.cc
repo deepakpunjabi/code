@@ -21,6 +21,8 @@ class Solution {
         for (int i = 0; i < nums.size(); ++i) {
             auto it = m.find(target - nums[i]);
             if (it != m.end()) {
+                // vector is object, it doesn't require new
+                // same as int i doesn't require new
                 return vector<int>{it->second, i};
             } else {
                 m.emplace(nums[i], i);
