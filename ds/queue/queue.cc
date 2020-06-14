@@ -63,6 +63,7 @@ class Queue {
 
     int size() {
         if (isEmpty()) return 0;
+        // because rear will also have the element
         return rear - front + 1;
     }
 
