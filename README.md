@@ -1,3 +1,13 @@
+# Code
+
+- [Notes](notes.md)
+- [Array](ds/array/array.md)
+- [Queue](ds/queue/queue.md)
+
+Run: `g++ --std=c++11 ds/queue/queue.cc && ./a.out`
+
+---
+`$ tree`
 ```
 .
 ├── README.md
@@ -84,4 +94,4 @@
 14 directories, 66 files
 ```
 
-Run: `g++ --std=c++11 ds/queue/queue.cc && ./a.out`
+
