@@ -10,8 +10,6 @@
 │   ├── deque.cpp
 │   ├── drawing-book.cpp
 │   ├── grading.cpp
-│   ├── graph
-│   │   └── detect-cycle-in-directed-graph.cpp
 │   ├── greedy
 │   │   ├── luck-balance.cpp
 │   │   └── minimum-absolute-difference-in-an-array.cpp
@@ -41,23 +39,24 @@
 ├── ds
 │   ├── array
 │   │   ├── 3sum.cc
-│   │   ├── binarySearch.old.cpp
+│   │   ├── array.md
 │   │   ├── binary_search.cpp
 │   │   ├── group_anagrams.cc
 │   │   ├── increasing-triplet-subsequence.cc
 │   │   ├── intersection-of-two-arrays.cc
-│   │   └── longest-substring-without-repeating-characters.cc
+│   │   ├── longest-substring-without-repeating-characters.cc
+│   │   ├── transpose-array.cc
+│   │   └── two-sum.cc
 │   ├── disjoint_set.cc
-│   ├── graph
-│   │   ├── bfs.cpp
-│   │   ├── dfs.cc
-│   │   ├── is_cyclic.cc
-│   │   └── topological_sort.cc
 │   ├── linked_list
 │   │   ├── linked_list.cpp
 │   │   └── odd-even-linked-list.cc
-│   ├── queue.cc
-│   ├── stack.cc
+│   ├── queue
+│   │   ├── queue.cc
+│   │   └── queue.md
+│   ├── stack
+│   │   ├── stack.cc
+│   │   └── valid-parentheses.cc
 │   └── tree
 │       ├── array-to-tree.cpp
 │       ├── heap
@@ -66,14 +65,23 @@
 │       ├── iterative_postorder.cc
 │       ├── leftView.cpp
 │       └── level_order_traversal.cpp
-├── go
-│   └── array_rotation.go
-├── splitwise.cpp
+├── graph
+│   ├── bfs.cc
+│   ├── detect-cycle-directed-graph.cc
+│   ├── detect-cycle-undirected-graph.cc
+│   ├── dfs.cc
+│   └── topological_sort.cc
+├── misc
+│   ├── palindrome-number.cc
+│   └── splitwise.cpp
+├── notes.md
 └── stl
     ├── comparator.cc
     ├── emplace_hint.cc
     ├── lower_bound.cc
     └── vector.cpp
 
-13 directories, 61 files
+14 directories, 66 files
 ```
+
+Run: `g++ --std=c++11 ds/queue/queue.cc && ./a.out`
