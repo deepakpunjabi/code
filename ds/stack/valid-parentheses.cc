@@ -25,6 +25,11 @@ class ValidParens {
         anti_parens['}'] = '{';
         anti_parens[']'] = '[';
     }
+    ~ValidParens() {
+        parens.clear();
+        anti_parens.clear();
+        s.clear();
+    }
 
     bool hasBalancedParens() {
         // clarify if empty input is balanced parens or not
