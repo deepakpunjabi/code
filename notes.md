@@ -12,6 +12,10 @@
 - Duplicate case values are not allowed.
 - switches are fall through in cpp, need to add break after every case.
 
+# vector
+
+- vector has a range based construtor which can be used in various use cases. eg. converting string to vector character array `vector<char> vc(str.begin(), str.end())`
+
 # map / unordered_map
 
 - map: balanced binary search tree, unordered_map: hash table
