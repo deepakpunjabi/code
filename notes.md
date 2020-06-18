@@ -15,6 +15,7 @@
 # vector
 
 - vector has a range based construtor which can be used in various use cases. eg. converting string to vector character array `vector<char> vc(str.begin(), str.end())`
+- initialize 2d vector as: `vector<vector<bool>> visited(rows, vector<bool>(cols, false))`
 
 # map / unordered_map
 
