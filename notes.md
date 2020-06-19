@@ -24,3 +24,8 @@
 - Performance of the hash table depends on the hash function but on average it is constant for search, insert and delete.
 
 - search: `m.find(elem) != m.end()`
+
+# string
+
+- use `stringstream` to tokenize(split) string, convert string to int, float, double, remove spaces from string, string to vector etc
+- use `getline(stream, result, delimeter)` to get split(via delimeter) into result(1 at a time) eg. `while (getline(ss, num, ","))`
