@@ -29,6 +29,20 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
+class DeleteNode {
+   public:
+    void deleteNode(ListNode* node) {
+        node->val = node->next->val;
+        node->next = node->next->next;
+    }
+};
+
+/* 
+Complexity Analysis
+Time: O(1)
+Space: O(1)
+*/
+
 class DeleteNodeNaive {
    public:
     void deleteNode(ListNode* node) {
@@ -47,18 +61,4 @@ class DeleteNodeNaive {
 Complexity Analysis
 Time: We visit each node once, hence O(n)
 Space: We don't store additional information, hence O(1)
-*/
-
-class DeleteNode {
-   public:
-    void deleteNode(ListNode* node) {
-        node->val = node->next->val;
-        node->next = node->next->next;
-    }
-};
-
-/* 
-Complexity Analysis
-Time: O(1)
-Space: O(1)
 */

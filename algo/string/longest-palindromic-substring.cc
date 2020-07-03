@@ -4,6 +4,44 @@
 
 using namespace std;
 
+string longestPalindrome(string s) {
+    // if (s.empty()) return s; // both are same
+    if (s.length() < 2) return s;
+    int start = 0;
+    int end = 0;
+
+    int max_len = 0;
+
+    for (int i = 0; i < s.length(); ++i) {
+        // odd length string "aba"
+        int len1 = expandFromMiddle(s, i, i);
+        // even length string "abba"
+        int len2 = expandFromMiddle(s, i, i + 1);
+        
+        int len = max(len1, len2);
+        if (len > max_len) {
+            max_len = len;
+            // as middle is on the left side
+            start = i - ((len - 1) / 2);
+            end = i + (len / 2);
+        }
+    }
+    // cout << start << max_len << endl;
+    return s.substr(start, max_len);
+}
+
+int expandFromMiddle(string s, int left, int right) {
+    if (s.empty()) return 0;
+    if (left > right) return 0;
+
+    while (left >= 0 && right && s[left] == s[right]) {
+        --left;
+        ++right;
+    }
+
+    return right - left - 1;
+}
+
 // void print(int m[][], int n) {
 //     for (int i = 0; i < n; ++i) {
 //         for (int j = 0; j < n; ++j) {
