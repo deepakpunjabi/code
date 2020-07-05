@@ -26,6 +26,7 @@ class Solution {
 
    public:
     Solution() {
+        // we can do string array instead
         button = {
             {'2', "abc"},
             {'3', "def"},
