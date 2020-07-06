@@ -1,3 +1,7 @@
+/* 
+    Time Complexity: O(V + E) - time taken to traverse every vertice and edge of the graph once
+*/
+
 #include <iostream>
 #include <list>
 #include <queue>
@@ -7,15 +11,19 @@ using namespace std;
 
 class Graph {
     int v;
+
     // can use vector as well.
     // vector<int> *adj;
     // adj = new vector<int>[v];
-
     list<int> *adj;
 
    public:
     Graph(int x) : v(x) {
         adj = new list<int>[v];
+    }
+
+    ~Graph() {
+        delete adj;
     }
 
     void addEdge(int u, int v) {
@@ -27,18 +35,13 @@ class Graph {
         vector<bool> visited(v, false);
 
         queue<int> q;
-
         visited[s] = true;
-        // start with source node
         q.push(s);
 
-        // maintain queue for ordering
         while (!q.empty()) {
             int front = q.front();
             q.pop();
-
-            // process node
-            cout << front << endl;
+            process(front);
 
             for (const auto &i : adj[front]) {
                 if (!visited[i]) {
@@ -47,6 +50,10 @@ class Graph {
                 }
             }
         }
+    }
+
+    void process(int v) {
+        cout << v << endl;
     }
 };
 
