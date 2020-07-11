@@ -29,3 +29,7 @@
 
 - use `stringstream` to tokenize(split) string, convert string to int, float, double, remove spaces from string, string to vector etc
 - use `getline(stream, result, delimeter)` to get split(via delimeter) into result(1 at a time) eg. `while (getline(ss, num, ","))`
+
+# queue
+
+- while poping from queue, you can initilize `count` as `queue.size()` and pop till `count--` instead of using a `separator` node.
