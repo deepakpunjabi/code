@@ -32,21 +32,22 @@ class Graph {
     }
 
     void bfs(int s) {
+        queue<int> q;
         vector<bool> visited(v, false);
 
-        queue<int> q;
-        visited[s] = true;
         q.push(s);
+        visited[s] = true;
 
         while (!q.empty()) {
-            int front = q.front();
+            int node = q.front();
             q.pop();
-            process(front);
 
-            for (const auto &i : adj[front]) {
+            process(node);
+
+            for (const auto &i : adj[node]) {
                 if (!visited[i]) {
-                    visited[i] = true;
                     q.push(i);
+                    visited[i] = true;
                 }
             }
         }
@@ -70,3 +71,10 @@ int main() {
 
     return 0;
 }
+
+/* 
+
+Time Complexity: O(V+E), as you visit each vertice and edge of graph once
+Space Complexity: O(V), as you might store all/v-1 nodes in the queue
+
+*/
