@@ -15,3 +15,13 @@ void recurse(input data, result reference) {
     recurse again
 }
 ```
+
+## Problems
+
+- Find Minumum Spanning Tree
+- Cycle Detection
+- Check path exists between 2 nodes
+- Topological Sorting
+- Bipratite Graph (2 Coloring Problem)
+- Strongly Connected Components
+- Maze(2D Matrix) Problems
