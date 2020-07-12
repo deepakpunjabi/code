@@ -6,6 +6,7 @@
 - Use higher level abstractions like full, empty instead of relying on internal constructors like top or rear.
 - Members and functions cannot have the same name, reason for this is in c/cpp everything can be addressed by pointer. So it cannot be known if `&front` is member `front` or function `front()`.
 - Don't forget to write return inside if statements.
+- Usually notes like distinct elements, non-decreasing input etc are hint to specialize your solution based on input needs. [plus-one.cc](ds/array/plus-one.cc) is one such great example.
 
 # switch
 
