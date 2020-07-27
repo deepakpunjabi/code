@@ -72,3 +72,8 @@ bool hasCycle(vector<int> &res, vector<int> &visited, int u, vector<vector<int>>
     res.push_back(u);
     return false;
 }
+
+/* 
+    TC: O(v+e), as we will visit each process each node and vertice once
+    SC: O(v), might need to store whole graph in the stack
+*/
