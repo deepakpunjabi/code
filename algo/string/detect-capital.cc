@@ -21,6 +21,7 @@ Note: The input will be a non-empty word consisting of uppercase and lowercase l
 
 using namespace std;
 
+// naive solution
 bool detectCapitalUse(string word) {
     if (word.length() == 1) return true;
 
@@ -33,4 +34,15 @@ bool detectCapitalUse(string word) {
     }
 
     return true;
+}
+
+// somewhat cooler
+bool detectCapitalUse(string word) {
+    int count = 0;
+
+    for (const auto &i : word) {
+        if (isupper(i)) ++count;
+    }
+
+    return count == word.length() || count == 0 || (count == 1 && isupper(word[0]));
 }
