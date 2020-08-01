@@ -57,9 +57,6 @@ vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
                 if (tmp->left) s2.push(tmp->left);
                 if (tmp->right) s2.push(tmp->right);
             }
-            left = false;
-            zigzag.push_back(row);
-            row.clear();
         } else {
             while (!s2.empty()) {
                 TreeNode *tmp = s2.top();
@@ -70,10 +67,11 @@ vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
                 if (tmp->right) s1.push(tmp->right);
                 if (tmp->left) s1.push(tmp->left);
             }
-            left = true;
-            zigzag.push_back(row);
-            row.clear();
+            
         }
+        left = !left;
+        zigzag.push_back(row);
+        row.clear();
     }
     return zigzag;
 }
