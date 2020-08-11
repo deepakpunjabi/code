@@ -19,6 +19,26 @@ void heapify(int arr[], int n, int root) {
     }
 }
 
+void heapifyDown(vector<int> &arr, int index) {
+    int largest = index;
+    int left = 2 * index + 1;
+    int right = 2 * index + 2;
+    
+    if (left  < arr.size() && arr[left] > arr[largest]) largest = left;
+    if (right  < arr.size() && arr[right] > arr[largest]) largest = right;
+    
+    if (largest != index) {
+        swap(arr[largest], arr[index]);
+        heapifyDown(arr, largest);
+    }
+}
+
+void createHeap(vector<int> &arr) {
+    for (int i = arr.size()/2 - 1; i >= 0; --i) {
+        heapifyDown(arr, i);
+    }
+}
+
 // in-place, not stable
 // O(n)
 void heapSort(int arr[], int n) {
