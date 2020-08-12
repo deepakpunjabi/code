@@ -1,52 +1,53 @@
-#include <utility>
+#include <vector>
 
 using namespace std;
 
-void heapify(int arr[], int n, int root) {
-    int largest = root;
-    int left = 2 * root + 1, right = 2 * root + 2;
-
-    if (left < n && arr[left] > arr[largest]) {
-        largest = left;
+class Heap {
+   public:
+    // builds a heap from unsorted array of size n
+    void buildHeap(int arr[], int n) {
+        int last = n / 2 - 1;
+        for (int i = last; i >= 0; --i) {
+            heapifyDown(arr, n, i);
+        }
     }
-    if (right < n && arr[right] > arr[largest]) {
-        largest = right;
+
+    // puts index into it's right place by comparing child nodes recursively
+    void heapifyDown(int arr[], int n, int index) {
+        int largest = index;
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+
+        if (left < n && arr[left] > arr[largest]) largest = left;
+        if (right < n && arr[right] > arr[largest]) largest = right;
+
+        if (largest != index) {
+            swap(arr[largest], arr[index]);
+            heapifyDown(arr, n, largest);
+        }
     }
 
-    if (largest != root) {
-        swap(arr[root], arr[largest]);
-        heapify(arr, n, largest);
+    // sorts a array, by picking maximum and sending it in the last repetatively
+    // in-place, not stable, O(n) amortized
+    void heapSort(int arr[], int n) {
+        buildHeap(arr, n);
+
+        // actual sort once heap is there
+        for (int i = n - 1; i > 0; --i) {
+            swap(arr[i], arr[0]);  // extract max and send it to last
+            heapifyDown(arr, i, 0);
+        }
     }
-}
 
-void heapifyDown(vector<int> &arr, int index) {
-    int largest = index;
-    int left = 2 * index + 1;
-    int right = 2 * index + 2;
-    
-    if (left  < arr.size() && arr[left] > arr[largest]) largest = left;
-    if (right  < arr.size() && arr[right] > arr[largest]) largest = right;
-    
-    if (largest != index) {
-        swap(arr[largest], arr[index]);
-        heapifyDown(arr, largest);
+    // O(n logn)
+    int extractMax(int arr[], int n) {
+        int max = arr[0];
+        process(max);
+
+        swap(arr[0], arr[n - 1]);
+        heapifyDown(arr, n - 1, 0);
     }
-}
 
-void createHeap(vector<int> &arr) {
-    for (int i = arr.size()/2 - 1; i >= 0; --i) {
-        heapifyDown(arr, i);
-    }
-}
-
-// in-place, not stable
-// O(n)
-void heapSort(int arr[], int n) {
-    for (int i = n / 2 - 1; i >= 0; --i) heapify(arr, n, i);
-}
-
-// O(n logn)
-int extractMax(int arr[], int n) {
-    swap(arr[0], arr[n - 1]);
-    heapify(arr, n - 1, 0);
-}
+    // print or process in any other way desired
+    void process(int i);
+};

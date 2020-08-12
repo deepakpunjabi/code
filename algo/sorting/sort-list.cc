@@ -12,46 +12,44 @@
   
 */
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* sortList(ListNode* head) {
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class MergeSortLL {
+   public:
+    ListNode *sortList(ListNode *head) {
         if (!head || !head->next) return head;
-        
+
         ListNode *slow = head;
         ListNode *fast = head;
         ListNode *tail;
-        
+
         while (fast && fast->next) {
             tail = slow;
             slow = slow->next;
             fast = fast->next->next;
         }
-        ListNode* mid = tail->next;
+        ListNode *mid = tail->next;
         tail->next = nullptr;
-        
+
         ListNode *left = sortList(head);
         ListNode *right = sortList(mid);
-        
+
         return merge(left, right);
     }
-    
-    ListNode* merge(ListNode *left, ListNode *right) {
+
+    ListNode *merge(ListNode *left, ListNode *right) {
         ListNode *res = new ListNode();
         ListNode *node = res;
-        
+
         while (left && right) {
             if (left->val < right->val) {
-                res->next = left;   
+                res->next = left;
                 left = left->next;
             } else {
                 res->next = right;
@@ -59,10 +57,10 @@ public:
             }
             res = res->next;
         }
-        
+
         if (left) res->next = left;
         if (right) res->next = right;
-        
+
         return node->next;
     }
 };

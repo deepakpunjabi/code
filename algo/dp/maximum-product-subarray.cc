@@ -12,22 +12,23 @@ Output: 0
 Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
 */
 
-class Solution {
-public:
-    int maxProduct(vector<int>& nums) {
-        if (nums.empty()) return 0;
-        
-        int curr_max = nums[0];
-        int curr_min = nums[0];
-        int res = nums[0];
-        
-        for (int i = 1; i < nums.size(); ++i) {
-            if (nums[i] < 0) swap(curr_max, curr_min);
-            curr_max = max(curr_max*nums[i], nums[i]);
-            curr_min = min(curr_min*nums[i], nums[i]);
-            res = max(res, curr_max);
-        }
-        
-        return res;
+#include <vector>
+
+using namespace std;
+
+int maxProduct(vector<int>& nums) {
+    if (nums.empty()) return 0;
+
+    int curr_max = nums[0];
+    int curr_min = nums[0]; // for -ve * -ve 
+    int res = nums[0];
+
+    for (int i = 1; i < nums.size(); ++i) {
+        if (nums[i] < 0) swap(curr_max, curr_min);
+        curr_max = max(curr_max * nums[i], nums[i]);
+        curr_min = min(curr_min * nums[i], nums[i]);
+        res = max(res, curr_max);
     }
-};
+
+    return res;
+}

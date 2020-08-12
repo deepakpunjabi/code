@@ -22,33 +22,39 @@ Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
 Output: false
 */
 
-class Solution {
-public:
-    bool wordBreak(string s, vector<string>& wordDict) {
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+
+using namespace std;
+
+class WordBreakMemoization {
+   public:
+    bool wordBreak(string s, vector<string> &wordDict) {
         unordered_set<string> words;
-        for (const auto &i: wordDict) words.insert(i);
-        
+        for (const auto &i : wordDict) words.insert(i);
+
         unordered_map<string, bool> wb;
         wb[""] = true;
-        
+
         return dfs(s, words, wb);
     }
-    
+
     bool dfs(string s, unordered_set<string> &words, unordered_map<string, bool> &wb) {
         auto it = wb.find(s);
         if (it != wb.end()) return it->second;
         if (words.find(s) != words.end()) return true;
-        
-        for (int l=1; l<s.length(); ++l) {
+
+        for (int l = 1; l < s.length(); ++l) {
             string prefix = s.substr(0, l);
             if (words.find(prefix) != words.end()) {
                 wb[prefix] = true;
-                string suffix = s.substr(l, s.length()-l);
+                string suffix = s.substr(l, s.length() - l);
                 wb[suffix] = dfs(suffix, words, wb);
                 if (wb[suffix]) return true;
             }
         }
-        
+
         wb[s] = false;
         return false;
     }
