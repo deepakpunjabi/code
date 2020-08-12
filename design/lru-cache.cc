@@ -44,14 +44,14 @@ class LRUCache {
         auto it = mapping[key];
         cache.erase(it);
         cache.push_front(key);
-        mapping[key] = cache.begin(); // trick
+        mapping[key] = cache.begin();  // trick
     }
 
     void evict() {
         int key = cache.back();
+        cache.pop_back();
         values.erase(key);
         mapping.erase(key);
-        cache.pop_back();
     }
 
    public:
@@ -60,14 +60,22 @@ class LRUCache {
     }
 
     int get(int key) {
-        if (mapping.find(key) == mapping.end()) return -1;
+        // if (mapping.find(key) == mapping.end()) return -1;
+        // int val = values[key];
+        // maintainLRU(key);
+        // return val;
 
-        int val = values[key];
+        auto it = values.find(key);
+        if (it == values.end()) return -1;
+
         maintainLRU(key);
+
+        int val = it->second;
         return val;
     }
 
     void put(int key, int value) {
+        // update if key exists
         if (mapping.find(key) != mapping.end()) {
             values[key] = value;
             maintainLRU(key);
@@ -76,6 +84,7 @@ class LRUCache {
 
         if (cache.size() == cap) evict();
 
+        // insert new k: v
         cache.push_front(key);
         mapping[key] = cache.begin();
         values[key] = value;
