@@ -21,7 +21,7 @@
 ### switch
 
 - Duplicate case values are not allowed.
-- switches are fall through in cpp, need to add break after every case.
+- switches are fall through in cpp, need to add break after every case. Once a case condition is true, all cases after it are also true if `break` is not applied.
 
 ### vector
 
@@ -31,7 +31,7 @@
 ### map / unordered_map
 
 - map: balanced binary search tree, unordered_map: hash table
-- Time complexity for map operations is `O(logn)` while for unordered_map is `O(logn)` on average.
+- Time complexity for map operations is `O(logn)` while for unordered_map is `O(1)` on average.
 - Performance of the hash table depends on the hash function but on average it is constant for search, insert and delete.
 
 - search: `m.find(elem) != m.end()`
