@@ -40,11 +40,13 @@ class Solution {
 
     int pathSum(TreeNode *root, int sum) {
         if (!root) return 0;
-        // discover all paths sum
+        // discover all paths sum starting from root
         dfs(root, sum);
-        // repeat for every subtree
+        
+        // paths not starting from root
         pathSum(root->left, sum);
         pathSum(root->right, sum);
+        
         return paths;
     }
 
