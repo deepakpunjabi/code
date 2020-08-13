@@ -60,6 +60,7 @@ class Solution {
         int count = 1;
 
         while (!q.empty()) {
+            // int count = q.size();
             while (count--) {
                 Node* tmp = q.front();
                 q.pop();
