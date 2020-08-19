@@ -36,6 +36,7 @@ class Trie {
     Trie() : is_word(false) {}
 
     /** Inserts a word into the trie. */
+    /*
     void insert(string word) {
         Trie *old = this;
         Trie *neww;
@@ -51,6 +52,19 @@ class Trie {
             old = neww;
         }
         neww->is_word = true;
+    } 
+    */
+
+    /** Inserts a word into the trie. */
+    void insert(string word) {
+        Trie *curr = this;
+        for (const auto &i : word) {
+            if (curr->children.find(i) == curr->children.end()) {
+                curr->children[i] = new Trie();
+            }
+            curr = curr->children[i];
+        }
+        curr->is_word = true;
     }
 
     /** Returns if the word is in the trie. */
