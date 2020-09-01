@@ -53,29 +53,29 @@ struct TreeNode {
 class Memoization {
    public:
     int rob(TreeNode *root) {
-        unordered_map<TreeNode *, int> dp;
-        return recurse(dp, root);
+        unordered_map<TreeNode *, int> cache;
+        return recurse(cache, root);
     }
 
-    int recurse(unordered_map<TreeNode *, int> &dp, TreeNode *node) {
+    int recurse(unordered_map<TreeNode *, int> &cache, TreeNode *node) {
         if (!node) return 0;
-        if (dp.find(node) != dp.end()) return dp[node];
+        if (cache.find(node) != cache.end()) return cache[node];
 
         // exclude root
         int child = 0;
-        child += recurse(dp, node->left);
-        child += recurse(dp, node->right);
+        child += recurse(cache, node->left);
+        child += recurse(cache, node->right);
 
         // include root
         int grandchild = 0;
         if (node->left) {
-            grandchild += recurse(dp, node->left->left) + recurse(dp, node->left->right);
+            grandchild += recurse(cache, node->left->left) + recurse(cache, node->left->right);
         }
         if (node->right) {
-            grandchild += recurse(dp, node->right->left) + recurse(dp, node->right->right);
+            grandchild += recurse(cache, node->right->left) + recurse(cache, node->right->right);
         }
 
-        dp[node] = max(node->val + grandchild, child);
-        return dp[node];
+        cache[node] = max(node->val + grandchild, child);
+        return cache[node];
     }
 };
