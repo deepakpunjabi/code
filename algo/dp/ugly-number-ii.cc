@@ -18,6 +18,11 @@
 
 using namespace std;
 
+/* 
+    next ugly number will be last ugly number * 2 or 3 or 5,
+    which ever yileds the minimum
+    we just need to take for for last eligible index for 2, 3 and 5
+*/
 class SolutionWithIndex {
    public:
     int nthUglyNumber(int n) {
@@ -41,44 +46,6 @@ class SolutionWithIndex {
             if (next == next2) ++i2;
             if (next == next3) ++i3;
             if (next == next5) ++i5;
-        }
-
-        return ugly[n - 1];
-    }
-};
-
-class SolutionWithIndexAndLastValue {
-   public:
-    int nthUglyNumber(int n) {
-        int ugly[n];
-        ugly[0] = 1;
-
-        int two = 2;
-        int i = 1;
-
-        int three = 3;
-        int j = 1;
-
-        int five = 5;
-        int k = 1;
-
-        int next_ugly;
-        for (int a = 1; a < n; ++a) {
-            next_ugly = min(two, min(three, five));
-            ugly[a] = next_ugly;
-
-            if (next_ugly == two) {
-                two = ugly[i] * 2;
-                ++i;
-            }
-            if (next_ugly == three) {
-                three = ugly[j] * 3;
-                ++j;
-            }
-            if (next_ugly == five) {
-                five = ugly[k] * 5;
-                ++k;
-            }
         }
 
         return ugly[n - 1];
