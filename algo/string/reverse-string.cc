@@ -12,24 +12,35 @@ class ReverseString {
             swap(s[i], s[length - i - 1]);
         }
     }
+
+    void reverseString(string& s) {
+        int low = 0;
+        int high = s.length() - 1;
+
+        while (low < high) {
+            swap(s[low], s[high]);
+            ++low;
+            --high;
+        }
+    }
 };
 
 int main() {
     string ip[] = {
-        "hello", // long odd length
-        "hell", // long even length
-        "he", // even
-        "h", // odd
-        "" // empty string
+        "hello",  // long odd length
+        "hell",   // long even length
+        "he",     // even
+        "h",      // odd
+        ""        // empty string
     };
 
     ReverseString rs;
-    for (const auto& i : ip) {
+    for (auto& i : ip) {
         // convert string into vector of character using constructor
-        vector<char> vc(i.begin(), i.end());
+        // vector<char> vc(i.begin(), i.end());
         cout << "str --> " << i << "\treverse --> ";
-        rs.reverseString(vc);
-        string s(vc.begin(), vc.end());
-        cout << s << endl;
+        rs.reverseString(i);
+        // string s(vc.begin(), vc.end());
+        cout << i << endl;
     }
 }
