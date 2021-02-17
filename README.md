@@ -5,12 +5,9 @@
 
 ## Run
 
----
 `g++ --std=c++11 ds/queue/queue.cc && ./a.out`
 
 ## Notes
-
----
 
 - Use `container.clear()` in class destructor to free up memory.
 - Focus on more software engineering type approach rather than competitive coding for interview.
