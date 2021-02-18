@@ -20,3 +20,22 @@ ListNode *reverseList(ListNode *head) {
     }
     return prev;
 }
+
+// similar approach
+ListNode *reverseList(ListNode *head) {
+    if (!head) return nullptr;
+
+    ListNode *prev = nullptr;
+    ListNode *curr = head;
+    
+    while (curr->next) {
+        ListNode *tmp = curr->next;
+        curr->next = prev;
+
+        prev = curr;
+        curr = tmp;
+    }
+    curr->next = prev;
+
+    return curr;
+}
