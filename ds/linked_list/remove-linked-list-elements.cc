@@ -8,27 +8,64 @@
 
 struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    ListNode(int x, ListNode* next) : val(x), next(next) {}
 };
 
-class Solution {
-   public:
-    ListNode *removeElements(ListNode *head, int val) {
-        ListNode *node = new ListNode();
-        ListNode *res = node;
+ListNode* removeElements(ListNode* head, int val) {
+    ListNode* res = new ListNode();
+    ListNode* tmp = res;
 
-        while (head) {
-            if (head->val != val) {
-                node->next = head;
-                node = node->next;
-            }
-            head = head->next;
+    while (head) {
+        if (head->val != val) {
+            tmp->next = head;
+            tmp = tmp->next;
         }
-        node->next = nullptr; // if last node is val, second last node will contain reference to it.
 
-        return res->next;
+        head = head->next;
     }
-};
+    // for cases, such as [1,2] val=2,
+    // res list's last node 1 will still have pointer to 2
+    tmp->next = nullptr; 
+    
+    return res->next;
+}
+
+/*
+[1,2,3]
+3
+
+res = [0]
+tmp = [0]
+
+while:
+head=1
+    0-nxt = 1
+    tmp = 1
+
+head=2
+    1-nxt=2
+    tmp=2
+    
+head=3
+
+2-nxt=null
+
+----
+
+[]
+3
+
+----
+
+[1,2]
+3
+
+----
+
+[1,2]
+1
+
+*/
