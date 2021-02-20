@@ -1,91 +1,89 @@
 /*
+    Implement a first in first out (FIFO) queue using only two stacks. 
+    The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
 
-    Implement a last in first out (LIFO) stack using only two queues. 
-    The implemented stack should support all the functions of a normal queue (push, top, pop, and empty).
-
-    Implement the MyStack class:
-    void push(int x) Pushes element x to the top of the stack.
-    int pop() Removes the element on the top of the stack and returns it.
-    int top() Returns the element on the top of the stack.
-    boolean empty() Returns true if the stack is empty, false otherwise.
+    Implement the MyQueue class:
+    void push(int x) Pushes element x to the back of the queue.
+    int pop() Removes the element from the front of the queue and returns it.
+    int peek() Returns the element at the front of the queue.
+    boolean empty() Returns true if the queue is empty, false otherwise.
 
     Notes:
-    You must use only standard operations of a queue, which means only push to back, peek/pop from front, size, and is empty operations are valid.
-    Depending on your language, the queue may not be supported natively. You may simulate a queue using a list or deque (double-ended queue), as long as you use only a queue's standard operations.
-    
+    You must use only standard operations of a stack, which means only push to top, peek/pop from top, size, and is empty operations are valid.
+    Depending on your language, the stack may not be supported natively. You may simulate a stack using a list or deque (double-ended queue) as long as you use only a stack's standard operations.
+    Follow-up: Can you implement the queue such that each operation is amortized O(1) time complexity? In other words, performing n operations will take overall O(n) time even if one of those operations may take longer.
+
     Example 1:
     Input
-    ["MyStack", "push", "push", "top", "pop", "empty"]
+    ["MyQueue", "push", "push", "peek", "pop", "empty"]
     [[], [1], [2], [], [], []]
     Output
-    [null, null, null, 2, 2, false]
+    [null, null, null, 1, 1, false]
 
     Explanation
-    MyStack myStack = new MyStack();
-    myStack.push(1);
-    myStack.push(2);
-    myStack.top(); // return 2
-    myStack.pop(); // return 2
-    myStack.empty(); // return False
-
+    MyQueue myQueue = new MyQueue();
+    myQueue.push(1); // queue is: [1]
+    myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
+    myQueue.peek(); // return 1
+    myQueue.pop(); // return 1, queue is [2]
+    myQueue.empty(); // return false
+    
     Constraints:
     1 <= x <= 9
-    At most 100 calls will be made to push, pop, top, and empty.
-    All the calls to pop and top are valid.
-
-    Follow-up: Can you implement the stack such that each operation is amortized O(1) time complexity? 
-    In other words, performing n operations will take overall O(n) time even if one of those operations may take longer. 
-    You can use more than two queues.
-
+    At most 100 calls will be made to push, pop, peek, and empty.
+    All the calls to pop and peek are valid.
 */
 
-#include <queue>
+#include <stack>
 
 using namespace std;
 
-class MyStack {
-    queue<int> q1;
-    queue<int> q2;
+class MyQueue {
+    stack<int> st1, st2;
 
    public:
     /** Initialize your data structure here. */
-    MyStack() {
+    MyQueue() {
     }
 
-    /** Push element x onto stack. */
+    /** Push element x to the back of queue. */
     void push(int x) {
-        q2.push(x);
-
-        while (!q1.empty()) {
-            q2.push(this->pop());
+        while (!st1.empty()) {
+            st2.push(this->pop());
         }
 
-        swap(q1, q2);
+        st1.push(x);
+
+        while (!st2.empty()) {
+            int top = st2.top();
+            st2.pop();
+            st1.push(top);
+        }
     }
 
-    /** Removes the element on top of the stack and returns that element. */
+    /** Removes the element from in front of queue and returns that element. */
     int pop() {
-        int top = q1.front();
-        q1.pop();
+        int top = st1.top();
+        st1.pop();
         return top;
     }
 
-    /** Get the top element. */
-    int top() {
-        return q1.front();
+    /** Get the front element. */
+    int peek() {
+        return st1.top();
     }
 
-    /** Returns whether the stack is empty. */
+    /** Returns whether the queue is empty. */
     bool empty() {
-        return q1.empty();
+        return st1.empty();
     }
 };
 
 /**
- * Your MyStack object will be instantiated and called as such:
- * MyStack* obj = new MyStack();
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
  * obj->push(x);
  * int param_2 = obj->pop();
- * int param_3 = obj->top();
+ * int param_3 = obj->peek();
  * bool param_4 = obj->empty();
  */
