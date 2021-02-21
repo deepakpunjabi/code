@@ -8,6 +8,120 @@
 
 using namespace std;
 
+class FinalSolution {
+   public:
+    string countOfAtoms(string formula) {
+        while (true) {
+            string resolve = removeParentheses(formula);
+            if (resolve == formula) {
+                break;
+            }
+
+            auto counts = countOfAtomsUtil(resolve);
+            int multiplier = findMultiplier(formula, resolve);
+
+            resolveCounts(counts, multiplier);
+            string resolved = generateString(counts);
+
+            resolve = "(" + resolve + ")";
+            if (multiplier != 1) {
+                resolve += to_string(multiplier);
+            }
+            
+            formula = replaceString(formula, resolve, resolved);
+        }
+
+        string res = compactify(formula);
+        return res;
+    }
+
+    map<string, int> countOfAtomsUtil(string formula) {
+        // to avoid duplicate code for last element in the loop.
+        formula += "X";
+        
+        map<string, int> counts;
+        string atom = "";
+        int count = 0;
+
+        for (const auto &i : formula) {
+            if (isupper(i)) {
+                if (!atom.empty()) {
+                    if (count == 0) {
+                        count = 1;
+                    };
+                    counts[atom] += count;
+                }
+                atom = i;
+                count = 0;
+            } else if (islower(i)) {
+                atom += i;
+            } else if (isdigit(i)) {
+                count = count * 10 + i - '0';
+            }
+        }
+
+        return counts;
+    }
+
+    string removeParentheses(string formula) {
+        string resolve = "";
+
+        for (int i = 0; i < formula.length(); ++i) {
+            if (formula[i] == '(') {
+                resolve = "";
+            } else if (formula[i] == ')') {
+                break;
+            } else {
+                resolve += formula[i];
+            }
+        }
+
+        return resolve;
+    }
+
+    int findMultiplier(string formula, string resolve) {
+        int mul = 0;
+        int pos = formula.find(resolve);
+        
+        int i = pos + resolve.length() + 1;
+        while (i < formula.length() && isdigit(formula[i])) {
+            mul = mul * 10 + formula[i] - '0';
+            ++i;
+        }
+
+        return (mul == 0) ? 1 : mul;
+    }
+
+    void resolveCounts(map<string, int> &counts, int mul) {
+        for (auto &i : counts) {
+            i.second *= mul;
+        }
+    }
+
+    string generateString(map<string, int> &counts) {
+        string res = "";
+        for (const auto &i : counts) {
+            res += i.first;
+            if (i.second != 1) {
+                res += to_string(i.second);
+            }
+        }
+        return res;
+    }
+
+    string replaceString(string formula, string resolve, string resolved) {
+        int pos = formula.find(resolve);
+        formula.replace(pos, resolve.length(), resolved);
+        return formula;
+    }
+    
+    string compactify(string formula) {
+        auto counts = countOfAtomsUtil(formula);
+        return generateString(counts);
+    }
+};
+
+
 class Solution {
    public:
     string removeParentheses(string formula) {
@@ -242,6 +356,6 @@ class Solution {
 };
 
 int main() {
-    Solution s;
+    FinalSolution s;
     cout << s.countOfAtoms("(H)") << endl;
 }
