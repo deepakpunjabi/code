@@ -11,10 +11,9 @@ int removeElement(vector<int>& nums, int val) {
         if (nums[start] == val) {
             swap(nums[start], nums[end]);
             --end;
-        }
-        // only move start after a successfull swap
-        // eg [3,3] val=3 shouldn't increament start
-        if (nums[start] != val) {
+        } else {
+            // only move start after a successfull swap
+            // eg [3,3] val=3 shouldn't increament start
             ++start;
         }
     }
