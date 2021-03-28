@@ -27,3 +27,11 @@ public:
         return res;
     }
 };
+
+/*
+
+    tc: O(m+n)
+    sc: O(min(m, n)) // only store the shorter array in memory, 
+    // result is never considered part of space complexity
+
+*/
