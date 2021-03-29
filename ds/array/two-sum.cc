@@ -10,9 +10,24 @@
 
 #include <unordered_map>
 #include <vector>
-
 using namespace std;
 
+// simpler codign style for maps, avoid iterators
+vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> mapping;
+
+    for (int i = 0; i < nums.size(); ++i) {
+        if (mapping.find(target - nums[i]) != mapping.end()) {
+            return vector<int>{mapping[target - nums[i]], i};
+        } else {
+            mapping[nums[i]] = i;
+        }
+    }
+
+    return vector<int>{};
+}
+
+// older
 class Solution {
    public:
     vector<int> twoSum(vector<int>& nums, int target) {
