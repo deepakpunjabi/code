@@ -23,22 +23,17 @@
 #include <unordered_map>
 using namespace std;
 
-class Solution {
-   public:
-    bool isAnagram(string s, string t) {
-        if (s.size() != t.size()) {
-            return false;
-        }
+bool isAnagram(string s, string t) {
+    if (s.size() != t.size()) return false;
 
-        // may as well use an unordered_map or a vector
-        int index[26] = {};
-        for (int i = 0; i < s.size(); ++i) {
-            index[s[i] - 'a']++;
-            index[t[i] - 'a']--;
-        }
-        for (int i : index) {
-            if (index[i]) return false;
-        }
-        return true;
+    // may as well use an unordered_map or a vector
+    int index[26] = {};
+    for (int i = 0; i < s.size(); ++i) {
+        index[s[i] - 'a']++;
+        index[t[i] - 'a']--;
     }
-};
+    for (int i : index) {
+        if (index[i]) return false;
+    }
+    return true;
+}
