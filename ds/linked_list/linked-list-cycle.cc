@@ -11,7 +11,7 @@ bool hasCycle(ListNode* head) {
     if (!head) return false;
 
     ListNode* slow = head;
-    ListNode* fast = head->next;
+    ListNode* fast = head->next; // so that loop doesn't return true on first slow == fast check
 
     while (fast && fast->next) {
         if (slow == fast) return true;
