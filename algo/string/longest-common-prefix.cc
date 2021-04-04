@@ -34,6 +34,7 @@ string longestCommonPrefix(vector<string>& strs) {
     bool breached = false;
     for (int j = 0; j < original.size(); ++j) {
         for (int i = 1; i < strs.size(); ++i) {
+            // string curr = strs[i]; // for better readability
             if (j == original.size() or j == strs[i].size() or original[j] != strs[i][j]) {
                 breached = true;
                 break;
@@ -45,5 +46,8 @@ string longestCommonPrefix(vector<string>& strs) {
         ++end;
     }
 
+    // takes signigicantlly less amount of time 
+    // than appending a char to res string
+    // after every loop
     return original.substr(0, end);
 }
