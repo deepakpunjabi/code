@@ -26,12 +26,10 @@ class MergeList {
         ListNode* merged = res;
 
         while (l1 && l2) {
-            if (l1->val <= l2->val) {
-                // cout << "attaching l1: " << l1->val << endl;
+            if (l1->val <= l2->val) { // '<' is also fine
                 res->next = l1;
                 l1 = l1->next;
             } else {
-                // cout << "attaching l2: " << l2->val << endl;
                 res->next = l2;
                 l2 = l2->next;
             }
@@ -45,11 +43,15 @@ class MergeList {
 };
 
 /*
-Important Test Cases;
-[][]
-[][1]
-[][1,2]
-[1,2][1,2]
-[1,2,3][1,2]
-[1,2,3][1,2,3]
+
+    Important Test Cases;
+    [][]
+    [][1]
+    [1,2][1,2]
+    [1,2,3][1,2]
+    [5][1,2] // non-overlapping lists
+
+    TC: O(m+n)
+    SC: O(1)
+
 */
