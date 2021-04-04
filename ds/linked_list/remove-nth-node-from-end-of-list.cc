@@ -19,25 +19,76 @@ struct ListNode {
     ListNode(int x, ListNode* next) : val(x), next(next) {}
 };
 
-/* use two pointers, keep d distance between the.
-solve for corner cases where remove node is last and first.
+/* 
+
+    Use two pointers, keep d distance between the.
+    There are 3 sub-cases for this problem:
+    - remove head
+    - remove tail
+    - remove node from in-between
+
  */
 ListNode* removeNthFromEnd(ListNode* head, int n) {
     ListNode* node = head;
-    ListNode* remove;
+    ListNode* remove = head;
 
+    // don't make node null
+    // eg. remove([1], 1)
     while (n-- && node->next) {
         node = node->next;
     }
-    remove = head;
 
     while (node->next) {
         node = node->next;
         remove = remove->next;
     }
 
+    // verify due to which condition you broke, accordingly remove node
     if (remove == head && n == 0) return head->next;
-    
+
     remove->next = remove->next->next;
     return head;
+}
+
+// simplify logic a bit by introducing a dummy node
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* res = new ListNode(0);
+    res->next = head;
+
+    ListNode* slow = res;
+    ListNode* fast = res;
+
+    for (int i = 0; i <= n; i++) {
+        fast = fast->next;
+    }
+
+    while (fast != nullptr) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    slow->next = slow->next->next;
+
+    return res->next;
+}
+
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* res = new ListNode(0);
+    res->next = head;
+
+    ListNode* slow = res; // keep slow a bit extra slow! this handles removal of head
+    ListNode* fast = head;
+
+    while (n--) {
+        fast = fast->next;
+    }
+
+    while (fast != nullptr) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    slow->next = slow->next->next;
+
+    return res->next;
 }
