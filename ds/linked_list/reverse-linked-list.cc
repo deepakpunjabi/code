@@ -8,34 +8,31 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+/*
+
+    This problem contains 2 cases:
+    - empty list: []
+    - non-empty list: 
+        - [1](odd-length, single element), 
+        - [1,2](even-length), 
+        - [1,2,3] (this last one is just for extra measure)
+
+    TC: O(n), processing each element once
+    SC: O(1)
+
+*/
 ListNode *reverseList(ListNode *head) {
+    if (!head or !head->next) return head; // covers [] and [1]
+
     ListNode *prev = nullptr;
     ListNode *curr = head;
-
     while (curr) {
-        ListNode *nxt = curr->next;
-        curr->next = prev;
+        ListNode *nextptr = curr->next;
+        curr->next = prev; // main logic
+
         prev = curr;
-        curr = nxt;
+        curr = nextptr;
     }
+
     return prev;
-}
-
-// similar approach
-ListNode *reverseList(ListNode *head) {
-    if (!head) return nullptr;
-
-    ListNode *prev = nullptr;
-    ListNode *curr = head;
-    
-    while (curr->next) {
-        ListNode *tmp = curr->next;
-        curr->next = prev;
-
-        prev = curr;
-        curr = tmp;
-    }
-    curr->next = prev;
-
-    return curr;
 }
