@@ -62,3 +62,17 @@ int maxProfit(vector<int>& prices) {
 
     return profit;
 }
+
+int maxProfit(vector<int>& prices) {
+    int lowest = prices[0];
+    int profit = 0;  // can't sell on first day
+
+    for (int i = 1; i < prices.size(); ++i) {
+        lowest = min(lowest, prices[i]); // find the lowest price of stock before this index
+        // do you keep the same profit as before?
+        // or change your sell date to today? prices[i]-lowest
+        profit = max(profit, prices[i] - lowest);
+    }
+
+    return profit;
+}
