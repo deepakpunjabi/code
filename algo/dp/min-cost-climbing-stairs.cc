@@ -39,3 +39,20 @@ int minCostClimbingStairs(vector<int>& cost) {
 
     return min(step1, step2);
 }
+
+// simple to understand
+// you can come to each step from one or two level below
+// so cost would be minimum costs from last 2 level + own cost
+int minCostClimbingStairs(vector<int>& cost) {
+    if (cost.size() == 2) return min(cost[0], cost[1]);
+
+    vector<int> dp(cost.size(), 0);
+    dp[0] = cost[0];
+    dp[1] = cost[1];
+
+    for (int i = 2; i < cost.size(); ++i) {
+        dp[i] = cost[i] + min(dp[i - 1], dp[i - 2]);
+    }
+
+    return min(dp[cost.size() - 1], dp[cost.size() - 2]);
+}
