@@ -21,6 +21,7 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+// create a new linked list
 ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
     ListNode *res = new ListNode();
     ListNode *node = res;
@@ -79,11 +80,68 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
     return node->next;
 }
 
+// Use existing linked list
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+    ListNode *res = l1;
+    ListNode *node = res;
+
+    int carry = 0;
+    while (l1 && l2) {
+        l1->val += l2->val + carry;
+        if (l1->val > 9) {
+            l1->val -= 10;
+            carry = 1;
+        } else {
+            carry = 0;
+        }
+
+        node = l1;
+        l1 = l1->next;
+        l2 = l2->next;
+    }
+    while (l1) {
+        if (!carry) break;
+
+        l1->val += carry;
+        if (l1->val > 9) {
+            l1->val -= 10;
+            carry = 1;
+        } else {
+            carry = 0;
+        }
+
+        node = l1;
+        l1 = l1->next;
+    }
+    if (l2) node->next = l2;
+    while (l2) {
+        if (!carry) break;
+
+        l2->val += carry;
+        if (l2->val > 9) {
+            l2->val -= 10;
+            carry = 1;
+        } else {
+            carry = 0;
+        }
+
+        node = l2;
+        l2 = l2->next;
+    }
+
+    if (carry) {
+        node->next = new ListNode(carry);
+    }
+
+    return res;
+}
+
 /*
 
 test cases:
-[][]
-[][1]
+[][] // not a valid test case
+[][1] // not a vaid test case
+[0][1]
 [9][9]
 [9][9,9]
 
