@@ -29,10 +29,10 @@
 
 */
 
-// you don't need to reverse the full number,
-// you can reverse only half of it and compare,
-// watch out for odd/even
 bool isPalindrome(int x) {
+    // negative numbers are not palindromes as per question
+    // 10 is special case for this algorithm
+    if (x < 0 or (x % 10 == 0 and x != 0)) return false;
     int rev = 0;
 
     while (x > rev) {
@@ -41,5 +41,6 @@ bool isPalindrome(int x) {
         rev = rev * 10 + rem;
     }
 
+    // number is even vs number is odd
     return (x == rev or x == rev / 10);
 }
