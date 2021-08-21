@@ -43,8 +43,6 @@
 
 ## Array
 
----
-
 - Arrays can have index starting from 0,1 or n based on usecase.
 - Metrics usually requires lot of looping, better to save `#rows` and `#cols`
  in separate variables.
@@ -69,16 +67,12 @@ sort(grid.begin(), grid(end),
 
 ## Backtracking
 
----
-
 1. Define a termination conditions.
 2. Loop through range of possibilities.
 3. Pass a common state between function calls.
 4. Reset state when a possibility doesn't work out.
 
 ## DFS
-
----
 
 ```cpp
 void doWork() {
@@ -108,8 +102,6 @@ void recurse(input data, result reference) {
 
 ## Bit Manipulation
 
----
-
 - Get LSB (least significant bit): 1. check `if (n % 2 == 0)` for even or 2. check `if (n & 1)` for odd
 - Memoization could become more advantageous when dealing with the input of long bit stream. Eg. reversing an arbitary length bit stream. Here you can store each `byte->reversed` as cache.
 - The left shift and right shift operators should not be used for negative numbers.
@@ -135,8 +127,6 @@ void recurse(input data, result reference) {
     ```
 
 ## Binary Heap
-
----
 
 - BHeap is a complete binary tree + each node is smaller than it's children.
 - Root is the minimum element in the tree.
@@ -172,15 +162,13 @@ void recurse(input data, result reference) {
 
 ## Trie (Prefix Tree)
 
----
-
 - A trie is a variant of an n-ary tree in which characters are stored at each node. 
 - Each path down the tree may represent a word.
 - The * nodes (sometimes called "null nodes") are often used to indicate complete words. eg. `MA`, `MAN*`, `MANY*`
 - End of word can be achieved via a boolean property in nodes as well.
 - Node can have `[0, ALPHABET_SIZE]` child nodes.
 - Often used for prefix lookups(useful for predictive searching).
-- Prefix lookup takes `O(k)` time where k is the lenght of lookup string. 
+- Prefix lookup takes `O(k)` time where k is the lenght of lookup string.
 
 ## Queue
 
@@ -204,8 +192,6 @@ void recurse(input data, result reference) {
 
 ## Graph
 
----
-
 - Collection of nodes with edges between **(some of)** them.
 - Directed vs Undirected
 - `Graph = [] subgraphs`
@@ -222,8 +208,6 @@ void recurse(input data, result reference) {
 - Tree traversals are a form of DFS.
 
 ## Sorting
-
----
 
 - Quickselect is a textbook algorthm typically used to solve the problems "find kth something": kth smallest, kth largest, kth most frequent, kth less frequent, etc.
 
