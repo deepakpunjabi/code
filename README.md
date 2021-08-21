@@ -184,8 +184,6 @@ void recurse(input data, result reference) {
 
 ## Queue
 
----
-
 - Follows FIFO: first in last out, eg. line of people waiting for their order to be served
 - front: start of the queue
 - rear: end of the queue
@@ -223,7 +221,7 @@ void recurse(input data, result reference) {
 - If we want to find the shortest path (or just any path) between two nodes, BFS is generally better.
 - Tree traversals are a form of DFS.
 
-### Sorting
+## Sorting
 
 ---
 
