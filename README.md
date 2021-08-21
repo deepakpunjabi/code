@@ -147,8 +147,6 @@ void recurse(input data, result reference) {
 
 ## Tree
 
----
-
 - Tree need not be a binary tree or binary search tree.
 - For BST(with duplicate values): `left nodes <= root < right nodes` order property is maintained
 - Complete Binary tree is where every level of the tree is filled(left to right), except for perhaps the last level.
@@ -212,7 +210,5 @@ void recurse(input data, result reference) {
 - Quickselect is a textbook algorthm typically used to solve the problems "find kth something": kth smallest, kth largest, kth most frequent, kth less frequent, etc.
 
 ## Linked List
-
----
 
 - As linked list is connected via pointers, you don't need to traverse whole ll to update or delete a node.
