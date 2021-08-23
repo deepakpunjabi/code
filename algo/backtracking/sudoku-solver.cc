@@ -161,3 +161,29 @@ int main() {
     cout << endl;
     s.print(matrix);
 }
+
+bool backtrack(vector<vector<char>>& board, int i, int j) {
+    //all rows checked
+    if (i == 9)
+        return true;
+
+    //current row over, go to next row starting from 0th column
+    if (j == 9)
+        return backtrack(board, i + 1, 0);
+
+    //if it's filled go for next column
+    if (board[i][j] != '.')
+        return backtrack(board, i, j + 1);
+
+    //else try putting '1' to '9' and see if you find the result in any
+    for (char ch = '1'; ch <= '9'; ch++) {
+        if (isValid(board, i, j, ch)) {
+            board[i][j] = ch;
+            if (backtrack(board, i, j + 1)) {
+                return true;
+            }
+            board[i][j] = '.';
+        }
+    }
+
+    return false;
