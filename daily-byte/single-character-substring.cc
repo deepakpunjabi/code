@@ -20,6 +20,7 @@
 #include <vector>
 using namespace std;
 
+// this algorithm does not produce unique substrings
 int singleCharacterSubstring(string s) {
     if (s.empty()) return 0;
 
@@ -34,19 +35,24 @@ int singleCharacterSubstring(string s) {
             count = 1;
         }
     }
+
+    res += count * (count + 1) / 2;
+    return res;
 }
 
 int main() {
-    vector<vector<int>> tc = {
-        {},
-        {0, 4, 8},
-        {1, 2, 3},
-        {1, 3, 4, 6},
-        {1, 2, 4, 4, 4},
+    vector<string> tc = {
+        "",
+        "a",
+        "aa",
+        "aaa"
+        "abc",
+        "abca",
+        "aabbccaaa",
     };
 
     for (auto &i : tc) {
-        // cout << indexEqualsValue(i) << endl;
+        cout << i << " --> " << singleCharacterSubstring(i) << endl;
     }
 
     return 0;
