@@ -37,9 +37,8 @@ int firstBadVersion(int n) {
 
     while (low <= high) {
         int mid = low + (high - low) / 2;
-
-        bool bad = isBadVersion(mid);
-        if (bad) {
+        
+        if (isBadVersion(mid)) {
             if (!isBadVersion(mid - 1)) return mid;  // need to see if that's the first one!
             high = mid - 1;
         } else {
