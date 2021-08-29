@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void reverseString(vector<char>& s) {
+void reverseString(string s) {
     int low = 0;
     int high = s.size() - 1;
 
