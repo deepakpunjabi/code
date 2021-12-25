@@ -1,15 +1,7 @@
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
-
-void quickSort(int arr[], int start, int end) {
-    if (start >= end) return;
-
-    // get partition index, and divide main problem into subproblems
-    int pi = partition(arr, start, end);
-    quickSort(arr, start, pi - 1);
-    quickSort(arr, pi + 1, end);
-}
 
 int partition(int arr[], int start, int end) {
     int pivot = arr[end];
@@ -38,4 +30,23 @@ int partition(int arr[], int start, int end) {
     // you had chosen pivot as end element, now you have to put it at final pivot_index
     swap(arr[pivot_index], arr[end]);
     return pivot_index;
+}
+
+void quickSort(int arr[], int start, int end) {
+    if (start >= end) return;
+
+    // get partition index, and divide main problem into subproblems
+    int pi = partition(arr, start, end);
+    quickSort(arr, start, pi - 1);
+    quickSort(arr, pi + 1, end);
+}
+
+int main() {
+    int arr[] = {4, 5, 7, 1, 2, 3};
+    quickSort(arr, 0, 5);
+    for (int i = 0; i < 6; ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return 0;
 }
