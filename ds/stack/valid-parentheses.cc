@@ -9,6 +9,31 @@ using namespace std;
 // - if for every prefix of the sequence, the number of opening brackets is greater than or equal to the number of closing brackets,
 // - and the total number of opening brackets is equal to the number of closing brackets.
 
+class Solution {
+   public:
+    bool isValid(string s) {
+        stack<char> st;
+
+        for (const auto &c : s) {
+            if (c == '(' or c == '{' or c == '[') {
+                st.push(c);
+            } else {
+                // otherwise st.top will give you segfault
+                if (st.empty()) return false;
+
+                char top = st.top();
+                if ((c == ')' and top == '(') or (c == '}' and top == '{') or (c == ']' and top == '[')) {
+                    st.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return st.empty();
+    }
+};
+
 // More software engineering related approach
 class ValidParens {
     unordered_map<char, char> parens;
