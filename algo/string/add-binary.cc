@@ -19,8 +19,42 @@
 */
 
 #include <string>
+#include <algorithm>
 
 using namespace std;
+
+// without fancy functions
+string addBinary(string a, string b) {
+        int i = a.size()-1;
+        int j = b.size()-1;
+        
+        string res = "";
+        
+        int carry = 0;
+        while (i >= 0 or j >= 0) {
+            int sum = carry;
+            
+            if (i >= 0) sum += a[i] - '0';
+            if (j >= 0) sum += b[j] - '0';
+            
+            if (sum > 1) {
+                sum -= 2;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            
+            res += sum + '0';
+            
+            --i;
+            --j;
+        }
+        
+        if (carry) res += '1';
+        
+        reverse(res.begin(), res.end());
+        return res;
+    }
 
 string addBinary(string a, string b) {
     string res;
