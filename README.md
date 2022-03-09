@@ -13,6 +13,7 @@
 - Don't forget to write return inside if statements.
 - Usually notes like distinct elements, non-decreasing input etc are hint to specialize your solution based on input needs. [plus-one.cc](ds/array/plus-one.cc) is one such great example.
 - `isupper()` returns value different from zero **(not 1)** if indeed c is an uppercase alphabetic letter. Zero (i.e., false) otherwise.
+- find sum by modulo `digit = sum%10` and carry by division `carry = sum/10`
 
 ### switch
 
