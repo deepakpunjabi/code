@@ -47,7 +47,10 @@ int removeDuplicates(vector<int>& nums) {
 
     int pos = 1;  // first position to replace
     for (int i = 1; i < nums.size(); ++i) {
-        if (nums[i] != nums[i - 1]) {  // replace when you find new element
+        // replace when you find new element
+        // what if the list contains 10M elements with only 1 duplicate?
+        // there will be so many unnecessary assignments
+        if (nums[i] != nums[i - 1]) {
             nums[pos] = nums[i];
             ++pos;
         }
