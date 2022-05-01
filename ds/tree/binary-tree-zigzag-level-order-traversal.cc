@@ -46,6 +46,8 @@ vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
 
     s1.push(root);
 
+    // use st1, st2, st
+    // st = st1 if left, st2 if right
     while (!s1.empty() || !s2.empty()) {
         if (left) {
             while (!s1.empty()) {
