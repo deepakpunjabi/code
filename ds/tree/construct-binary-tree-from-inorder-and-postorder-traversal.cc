@@ -1,5 +1,6 @@
 
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -32,5 +33,35 @@ class Solution {
         node->left = recurse(postorder, p1, p2 - right_width - 1, inorder, i1, i - 1);
         node->right = recurse(postorder, p2 - right_width, p2 - 1, inorder, i + 1, i2);
         return node;
+    }
+};
+
+class Solution {
+   public:
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        return recurse(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
+    }
+
+    // Here we are focusing on the left width rather than the right width.
+    // Moreover, all parameters are referred wrt to width.
+    // so equations are in the form of: (low + width)
+    TreeNode* recurse(vector<int>& inorder, int l1, int h1, vector<int>& postorder, int l2, int h2) {
+        if (l1 > h1 or l2 > h2) {
+            return nullptr;
+        }
+
+        int val = postorder[h2];
+        TreeNode* root = new TreeNode(val);
+
+        auto it = find(inorder.begin(), inorder.end(), val);
+        if (it == inorder.end()) {
+            return nullptr;
+        }
+        int width = (it - inorder.begin()) - l1;
+
+        root->left = recurse(inorder, l1, l1 + width - 1, postorder, l2, l2 + width - 1);
+        root->right = recurse(inorder, l1 + width + 1, h1, postorder, l2 + width, h2 - 1);
+
+        return root;
     }
 };
