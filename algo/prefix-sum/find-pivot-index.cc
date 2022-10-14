@@ -46,11 +46,13 @@
 using namespace std;
 
 int pivotIndex(vector<int>& nums) {
+    int sum = 0;
+    for (int i = 0; i < nums.size(); ++i) {
+        sum += nums[i];
+    }
+
     int lsum = 0;
-    int rsum = 0;
-
-    for (const auto& i : nums) rsum += i;
-
+    int rsum = sum;
     for (int i = 0; i < nums.size(); ++i) {
         rsum -= nums[i];
         if (lsum == rsum) {
