@@ -1,4 +1,4 @@
-/* 
+/*
 
     Given a collection of intervals, merge all overlapping intervals.
 
@@ -20,27 +20,53 @@ using namespace std;
 
 // compare successive intervals to check if end of first overlaps with start of second
 vector<vector<int>> merge(vector<vector<int>> &intervals) {
-    if (intervals.size() <= 1) return intervals;
+  if (intervals.size() <= 1)
+    return intervals;
 
-    // sorting is necessary to compare successive intervals
-    sort(intervals.begin(), intervals.end(),
-         [](const vector<int> &a, const vector<int> &b) {
-             return a[0] < b[0];
-         });
+  // sorting is necessary to compare successive intervals
+  sort(intervals.begin(), intervals.end(),
+       [](const vector<int> &a, const vector<int> &b) {
+         return a[0] < b[0];
+       });
 
-    vector<vector<int>> res;
-    vector<int> curr = {intervals[0][0], intervals[0][1]};
-    for (int i = 1; i < intervals.size(); ++i) {
-        if (intervals[i][0] <= curr[1]) {
-            // update interval end
-            curr[1] = max(intervals[i][1], curr[1]);
-        } else {
-            res.push_back(curr);
-            curr[0] = intervals[i][0];
-            curr[1] = intervals[i][1];
-        }
+  vector<vector<int>> res;
+  vector<int> curr = {intervals[0][0], intervals[0][1]};
+  for (int i = 1; i < intervals.size(); ++i) {
+    if (intervals[i][0] <= curr[1]) {
+      // update interval end
+      curr[1] = max(intervals[i][1], curr[1]);
+    } else {
+      res.push_back(curr);
+      curr[0] = intervals[i][0];
+      curr[1] = intervals[i][1];
+    }
+  }
+
+  res.push_back(curr);
+  return res;
+}
+
+class Solution {
+  // is input sorted?
+  // each individual interval sorted?
+  // extended q: partition the intervals equally?
+ public:
+  vector<vector<int>> merge(vector<vector<int>> &intervals) {
+    // sorts vectors lexographically
+    sort(intervals.begin(), intervals.end());
+
+    vector<vector<int>> res = {intervals[0]};
+    for (int i = 1; i < intervals.size(); i++) {
+      vector<int> &first = res.back();
+      // [1 3]
+      if (first[1] >= intervals[i][0]) {
+        first[1] = max(first[1], intervals[i][1]);
+        // [1 6]
+      } else {
+        res.push_back(intervals[i]);
+      }
     }
 
-    res.push_back(curr);
     return res;
-}
+  }
+};
