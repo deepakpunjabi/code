@@ -39,6 +39,8 @@ using namespace std;
 class Solution {
  public:
   int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
+    // perform bottoms up DFS but store the results so you don't have to process a node twice
+    // TC: O(n), SC: O(n)
     vector<int> totalTime(n, 0);
     vector<bool> processed(n, false);
     int maxTime = 0;
